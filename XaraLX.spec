@@ -14,14 +14,23 @@ BuildRequires:	automake
 BuildRequires:	gettext-devel
 BuildRequires:	libtool
 BuildRequires:	perl-base
-BuildRequires:	wxGTK2-unicode-devel > 2.6.2
+BuildRequires:	wxGTK2-unicode-devel >= 2.6.2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-Xara Extreme LX Vector Image Editor.
+Xara eXtreme is a 2D vector graphics editor created by a small British
+software company named Xara, notable for being the first vector
+graphics software product to provide fully anti-aliased display,
+advanced gradient fill and transparency tools, now available in many
+of the competitors' products. Xara X is also notable for its usability
+and very fast renderer
 
 %description -l pl
-Edytor obrazów wektorowych Xara Extreme LX.
+Xara eXtreme jest edytorem grafiki 2D stworzonym przez ma³± brytyjsk±
+firmê Xara, pierwszym wektorowym programem udostêpniaj±cym pe³ny
+anty-aliasing, rozbudowane wype³nianie gradientami i narzêdzia do
+prze¼roczysto¶ci, teraz dostêpne w wielu innych produktach. Xara X
+jest tak¿e znana z u¿yteczno¶ci i prêdko¶ci dzia³ania.
 
 %prep
 %setup -q
