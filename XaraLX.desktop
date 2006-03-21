@@ -2,11 +2,11 @@
 Name=Xara Extreme LX Vector Image Editor
 Name[pl]=Edytor obrazów wektorowych Xara Extreme LX
 Comment=Create and edit Xara images
-Comment[pl]=Utwórz i edytuj rysunek wektorowy Xara
+Comment[pl]=Utwórz i modyfikuj rysunek wektorowy Xara
 Encoding=UTF-8
 Version=1.0
 Type=Application
-Categories=Application;Graphics;VectorGraphics;GTK;
+Categories=Graphics;VectorGraphics;GTK;
 FilePattern=XaraLX
 Exec=XaraLX %F
 TryExec=XaraLX
