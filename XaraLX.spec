@@ -1,21 +1,27 @@
-#
 Summary:	Xara Extreme LX Vector Image Editor
+Summary(pl):	Edytor obrazów wektorowych Xara Extreme LX
 Name:		XaraLX
 Version:	0.3r693
 Release:	0.1
-License:	- (enter GPL/GPL v2/LGPL/BSD/BSD-like/other license name here)
-Group:		Applications
+License:	GPL
+Group:		X11/Applications
 Source0:	http://downloads.xara.com/opensource/%{name}_%{version}.tar.bz2
 # Source0-md5:	70c9490007e2d9914840f937ff28434d
-URL:		http://www.xaraxtreme.org
+URL:		http://www.xaraxtreme.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
+# ???
+BuildRequires:	gettext-devel
 BuildRequires:	libtool
-BuildRequires:	perl
+BuildRequires:	perl-base
 BuildRequires:	wxGTK2-unicode-devel > 2.6.2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
+Xara Extreme LX Vector Image Editor.
+
+%description -l pl
+Edytor obrazów wektorowych Xara Extreme LX.
 
 %prep
 %setup -q
@@ -42,4 +48,4 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%{_bindir}/*
+%attr(755,root,root) %{_bindir}/*
