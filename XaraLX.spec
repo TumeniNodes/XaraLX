@@ -16,6 +16,7 @@ BuildRequires:	gettext-devel
 BuildRequires:	libtool
 BuildRequires:	perl-base
 BuildRequires:	wxGTK2-unicode-devel >= 2.6.2
+ExclusiveArch:	%{ix86} %{x8664}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -73,7 +74,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc LICENSE
+%doc LICENSE libs/LIBS-LICENSE
 %attr(755,root,root) %{_bindir}/*
 %{_desktopdir}/*.desktop
 
