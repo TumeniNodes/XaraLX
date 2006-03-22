@@ -16,6 +16,7 @@ BuildRequires:	gettext-devel
 BuildRequires:	libtool
 BuildRequires:	perl-base
 BuildRequires:	wxGTK2-unicode-devel >= 2.6.2
+BuildRequires:	zip
 ExclusiveArch:	%{ix86} %{x8664}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
