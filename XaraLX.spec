@@ -4,20 +4,19 @@ Name:		XaraLX
 Version:	0.4r804
 Release:	1
 License:	GPL v2 with binary libraries - see LICENSE files
-Group:		X11/Applications
+Group:		X11/Applications/Graphics
 Source0:	http://downloads.xara.com/opensource/%{name}-%{version}.tar.bz2
 # Source0-md5:	2dcc6c9c56f2c0676b6fb5b5a4fdab42
 Source1:	%{name}.desktop
 URL:		http://www.xaraxtreme.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
-# ???
-BuildRequires:	gettext-devel
+BuildRequires:	gettext-devel >= 0.14.3
 BuildRequires:	libtool
 BuildRequires:	perl-base
 BuildRequires:	wxGTK2-unicode-devel >= 2.6.2
 BuildRequires:	zip
-ExclusiveArch:	%{ix86} %{x8664}
+ExclusiveArch:	%{ix86} %{x8664} ppc
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -38,7 +37,7 @@ jest tak¿e znana z u¿yteczno¶ci i prêdko¶ci dzia³ania.
 %package examples
 Summary:        Examples from Xara Extreme LX
 Summary(pl):    Przyk³ady z Xara Extreme LX
-Group:          X11/Applications
+Group:          X11/Applications/Graphics
 
 %description examples
 Examples from Xara Extreme LX.
