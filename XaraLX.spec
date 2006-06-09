@@ -35,9 +35,9 @@ prze¼roczysto¶ci, teraz dostêpne w wielu innych produktach. Xara X
 jest tak¿e znana z u¿yteczno¶ci i prêdko¶ci dzia³ania.
 
 %package examples
-Summary:        Examples from Xara Extreme LX
-Summary(pl):    Przyk³ady z Xara Extreme LX
-Group:          X11/Applications/Graphics
+Summary:	Examples from Xara Extreme LX
+Summary(pl):	Przyk³ady z Xara Extreme LX
+Group:		X11/Applications/Graphics
 
 %description examples
 Examples from Xara Extreme LX.
