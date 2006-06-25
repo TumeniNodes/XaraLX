@@ -69,11 +69,21 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_examplesdir}/%{name},%{_desktopdir},%{_pixmapsdir}}
 cp -r Designs testfiles $RPM_BUILD_ROOT%{_examplesdir}/%{name}
 
+ln -sf XaraLX $RPM_BUILD_ROOT%{_bindir}/xaralx3B
+
 install xaralx.desktop $RPM_BUILD_ROOT%{_desktopdir}
 install xaralx.png $RPM_BUILD_ROOT%{_pixmapsdir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
+
+%post
+umask 022
+[ ! -x /usr/bin/update-desktop-database ] || /usr/bin/update-desktop-database >/dev/null 2>&1 ||:
+
+%postun
+umask 022
+[ ! -x /usr/bin/update-desktop-database ] || /usr/bin/update-desktop-database >/dev/null 2>&1
 
 %files
 %defattr(644,root,root,755)
