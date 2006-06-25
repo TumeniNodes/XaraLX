@@ -69,7 +69,7 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_examplesdir}/%{name},%{_desktopdir},%{_pixmapsdir}}
 cp -r Designs testfiles $RPM_BUILD_ROOT%{_examplesdir}/%{name}
 
-ln -sf XaraLX $RPM_BUILD_ROOT%{_bindir}/xaralx3B
+ln -sf XaraLX $RPM_BUILD_ROOT%{_bindir}/xaralx
 
 install xaralx.desktop $RPM_BUILD_ROOT%{_desktopdir}
 install xaralx.png $RPM_BUILD_ROOT%{_pixmapsdir}
