@@ -1,0 +1,20 @@
+diff -aurN XaraLX-0.5r1357.orig/xaralx.desktop XaraLX-0.5r1357/xaralx.desktop
+--- XaraLX-0.5r1357.orig/xaralx.desktop	2006-06-25 13:40:40.000000000 +0200
++++ XaraLX-0.5r1357/xaralx.desktop	2006-06-25 17:29:07.190083216 +0200
+@@ -3,12 +3,13 @@
+ Encoding=UTF-8
+ Name=Xara LX
+ Comment=Versatile vector graphics program
+-Comment[de_DE]=Vielseitiges Vektorgraphik-Programm
++Comment[de]=Vielseitiges Vektorgraphik-Programm
++Comment[pl]=Wszechstronny program do grafiki wektorowej
+ Comment[pt_BR]=Versátil programa para gráficos vetoriais
+-Icon=xaralx.png
++Icon=xaralx
+ Terminal=false
+ Type=Application
+-Categories=Application;Graphics;VectorGraphics;
++Categories=GTK;Graphics;VectorGraphics;
+ StartupNotify=true
+ MimeType=image/xar;application/x-extension-xar;
+ FilePattern=xaralx;
