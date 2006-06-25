@@ -1,20 +1,20 @@
 Summary:	Xara Extreme LX Vector Image Editor
 Summary(pl):	Edytor obrazów wektorowych Xara Extreme LX
 Name:		XaraLX
-Version:	0.4r1041
+Version:	0.5r1357
 Release:	1
 License:	GPL v2 with binary libraries - see LICENSE files
 Group:		X11/Applications/Graphics
 Source0:	http://downloads.xara.com/opensource/%{name}-%{version}.tar.bz2
-# Source0-md5:	7dd6bd62214c32e13bd19428cc6031e9
-Source1:	%{name}.desktop
+# Source0-md5:	86e42d93cc76ca7e561b205a3e25c4fc
+Patch0:		%{name}-desktop.patch
 URL:		http://www.xaraxtreme.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	gettext-devel >= 0.14.3
+BuildRequires:	gettext-autopoint
 BuildRequires:	libtool
 BuildRequires:	perl-base
-BuildRequires:	wxGTK2-unicode-devel >= 2.6.2
+BuildRequires:	wxGTK2-unicode-devel >= 2.6.3
 BuildRequires:	zip
 ExclusiveArch:	%{ix86} %{x8664} ppc
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -47,15 +47,16 @@ Przyk³ady z Xara Extreme LX.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
-%{__gettextize}
+%{__autopoint}
+%{__aclocal} -I m4
 %{__libtoolize}
-%{__aclocal}
 %{__autoconf}
-%{__autoheader}
 %{__automake}
 %configure \
+	OPT_FLAGS="" \
 	--with-wx-config=wx-gtk2-unicode-config
 %{__make}
 
@@ -65,9 +66,11 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
-install -d $RPM_BUILD_ROOT{%{_examplesdir}/%{name},%{_desktopdir}}
+install -d $RPM_BUILD_ROOT{%{_examplesdir}/%{name},%{_desktopdir},%{_pixmapsdir}}
 cp -r Designs testfiles $RPM_BUILD_ROOT%{_examplesdir}/%{name}
-install %{SOURCE1} $RPM_BUILD_ROOT%{_desktopdir}
+
+install xaralx.desktop $RPM_BUILD_ROOT%{_desktopdir}
+install xaralx.png $RPM_BUILD_ROOT%{_pixmapsdir}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -77,6 +80,7 @@ rm -rf $RPM_BUILD_ROOT
 %doc LICENSE libs/LIBS-LICENSE
 %attr(755,root,root) %{_bindir}/*
 %{_desktopdir}/*.desktop
+%{_pixmapsdir}/*.png
 
 %files examples
 %defattr(644,root,root,755)
