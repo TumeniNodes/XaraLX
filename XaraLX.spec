@@ -1,12 +1,12 @@
 Summary:	Xara Extreme LX Vector Image Editor
 Summary(pl):	Edytor obrazów wektorowych Xara Extreme LX
 Name:		XaraLX
-Version:	0.5r1403
+Version:	0.6r1443
 Release:	1
 License:	GPL v2 with binary libraries - see LICENSE files
 Group:		X11/Applications/Graphics
 Source0:	http://downloads.xara.com/opensource/%{name}-%{version}.tar.bz2
-# Source0-md5:	d6197a81632fca130e79e3f1383996b4
+# Source0-md5:	ef6dccfa72931799efe9c35ade4464cc
 Patch0:		%{name}-desktop.patch
 URL:		http://www.xaraxtreme.org/
 BuildRequires:	autoconf
