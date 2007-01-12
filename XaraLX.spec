@@ -14,6 +14,7 @@ BuildRequires:	automake
 BuildRequires:	gettext-autopoint
 BuildRequires:	libtool
 BuildRequires:	perl-base
+BuildRequires:	pkgconfig
 BuildRequires:	wxGTK2-unicode-devel >= 2.6.3
 BuildRequires:	zip
 ExclusiveArch:	%{ix86} %{x8664} ppc
