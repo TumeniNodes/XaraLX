@@ -1,5 +1,5 @@
 Summary:	Xara Extreme LX Vector Image Editor
-Summary(pl):	Edytor obrazów wektorowych Xara Extreme LX
+Summary(pl.UTF-8):   Edytor obrazÃ³w wektorowych Xara Extreme LX
 Name:		XaraLX
 Version:	0.7r1693
 Release:	1
@@ -28,23 +28,23 @@ advanced gradient fill and transparency tools, now available in many
 of the competitors' products. Xara X is also notable for its usability
 and very fast renderer
 
-%description -l pl
-Xara eXtreme jest edytorem grafiki 2D stworzonym przez ma³± brytyjsk±
-firmê Xara, pierwszym wektorowym programem udostêpniaj±cym pe³ny
-anty-aliasing, rozbudowane wype³nianie gradientami i narzêdzia do
-prze¼roczysto¶ci, teraz dostêpne w wielu innych produktach. Xara X
-jest tak¿e znana z u¿yteczno¶ci i prêdko¶ci dzia³ania.
+%description -l pl.UTF-8
+Xara eXtreme jest edytorem grafiki 2D stworzonym przez maÅ‚Ä… brytyjskÄ…
+firmÄ™ Xara, pierwszym wektorowym programem udostÄ™pniajÄ…cym peÅ‚ny
+anty-aliasing, rozbudowane wypeÅ‚nianie gradientami i narzÄ™dzia do
+przeÅºroczystoÅ›ci, teraz dostÄ™pne w wielu innych produktach. Xara X
+jest takÅ¼e znana z uÅ¼ytecznoÅ›ci i prÄ™dkoÅ›ci dziaÅ‚ania.
 
 %package examples
 Summary:	Examples from Xara Extreme LX
-Summary(pl):	Przyk³ady z Xara Extreme LX
+Summary(pl.UTF-8):   PrzykÅ‚ady z Xara Extreme LX
 Group:		X11/Applications/Graphics
 
 %description examples
 Examples from Xara Extreme LX.
 
-%description examples -l pl
-Przyk³ady z Xara Extreme LX.
+%description examples -l pl.UTF-8
+PrzykÅ‚ady z Xara Extreme LX.
 
 %prep
 %setup -q
