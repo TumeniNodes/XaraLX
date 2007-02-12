@@ -1,5 +1,5 @@
 Summary:	Xara Extreme LX Vector Image Editor
-Summary(pl.UTF-8):   Edytor obrazów wektorowych Xara Extreme LX
+Summary(pl.UTF-8):	Edytor obrazów wektorowych Xara Extreme LX
 Name:		XaraLX
 Version:	0.7r1693
 Release:	1
@@ -37,7 +37,7 @@ jest także znana z użyteczności i prędkości działania.
 
 %package examples
 Summary:	Examples from Xara Extreme LX
-Summary(pl.UTF-8):   Przykłady z Xara Extreme LX
+Summary(pl.UTF-8):	Przykłady z Xara Extreme LX
 Group:		X11/Applications/Graphics
 
 %description examples
