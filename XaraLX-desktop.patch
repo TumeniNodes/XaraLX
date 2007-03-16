@@ -1,20 +1,24 @@
-diff -aurN XaraLX-0.5r1357.orig/xaralx.desktop XaraLX-0.5r1357/xaralx.desktop
---- XaraLX-0.5r1357.orig/xaralx.desktop	2006-06-25 13:40:40.000000000 +0200
-+++ XaraLX-0.5r1357/xaralx.desktop	2006-06-25 17:29:07.190083216 +0200
-@@ -3,12 +3,13 @@
+--- XaraLX-0.7r1766/xaralx.desktop.orig	2007-03-14 08:07:41.000000000 +0000
++++ XaraLX-0.7r1766/xaralx.desktop	2007-03-14 08:08:39.000000000 +0000
+@@ -3,14 +3,15 @@
  Encoding=UTF-8
- Name=Xara LX
+ Name=Xara Xtreme
  Comment=Versatile vector graphics program
--Comment[de_DE]=Vielseitiges Vektorgraphik-Programm
-+Comment[de]=Vielseitiges Vektorgraphik-Programm
-+Comment[pl]=Wszechstronny program do grafiki wektorowej
- Comment[pt_BR]=Versátil programa para gráficos vetoriais
+-Comment[de_DE]=Leistungsstarkes Vektorgrafik-Programm
+-Comment[fr_FR]=Logiciel d'illustration vectorielle polyvalent
+-Comment[it_IT]=Versatile programma di grafica vettoriale
+-Comment[pt_BR]=Versátil programa para gráficos vetoriais
 -Icon=xaralx.png
++Comment[de]=Leistungsstarkes Vektorgrafik-Programm
++Comment[fr]=Logiciel d'illustration vectorielle polyvalent
++Comment[it]=Versatile programma di grafica vettoriale
++Comment[pl]=Wszechstronny program do grafiki wektorowej
++Comment[pt]=Versátil programa para gráficos vetoriais
 +Icon=xaralx
  Terminal=false
  Type=Application
 -Categories=Application;Graphics;VectorGraphics;
 +Categories=GTK;Graphics;VectorGraphics;
  StartupNotify=true
- MimeType=image/xar;application/x-extension-xar;
+ MimeType=application/vnd.xara;application/x-extension-xar;
  FilePattern=xaralx;

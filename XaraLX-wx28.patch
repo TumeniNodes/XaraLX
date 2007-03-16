@@ -1,0 +1,61 @@
+--- XaraLX-0.7r1766/wxOil/fileinfolist.h.orig	2007-03-14 23:11:45.000000000 +0000
++++ XaraLX-0.7r1766/wxOil/fileinfolist.h	2007-03-14 23:12:12.000000000 +0000
+@@ -98,6 +98,7 @@
+ #ifndef WXOIL_FILEINFOLIST_H
+ #define WXOIL_FILEINFOLIST_H
+ 
++#include <wx/imaglist.h>
+ 
+ 
+ class CFileInfoList
+--- XaraLX-0.7r1766/wxOil/dlgmgr.cpp.orig	2007-03-14 16:24:23.000000000 +0000
++++ XaraLX-0.7r1766/wxOil/dlgmgr.cpp	2007-03-14 17:39:51.000000000 +0000
+@@ -99,6 +99,7 @@
+ // Implementation of the DialogManager class (bodge central)
+ 
+ // Include files
++#include <wx/imaglist.h>
+ #include "camtypes.h"
+ 
+ #include "dlgmgr.h"
+@@ -7173,7 +7174,7 @@
+ 		pTLW = pTLW->GetParent();
+ 
+ 	if (pTLW)
+-		pTLW->SetTitle( (TCHAR *)(*Name) );
++		pTLW->SetLabel( (TCHAR *)(*Name) );
+ 
+ 	return true;
+ }
+
+--- XaraLX-0.7r1766/wxOil/camframe.h.orig	2007-03-14 13:26:22.000000000 +0000
++++ XaraLX-0.7r1766/wxOil/camframe.h	2007-03-14 16:32:09.000000000 +0000
+@@ -98,6 +98,7 @@
+ #ifndef INC_CAMFRAME
+ #define INC_CAMFRAME
+ 
++#include <wx/fl/frmview.h>
+ // Forward definitions
+ class CCamCanvas;
+ class wxFrameManager;
+--- XaraLX-0.7r1766/wxXtra/gridcombo.cpp.orig	2007-03-14 09:53:29.000000000 +0000
++++ XaraLX-0.7r1766/wxXtra/gridcombo.cpp	2007-03-14 09:53:44.000000000 +0000
+@@ -11,6 +11,7 @@
+ 
+ #include "gridcombo.h"
+ #include <wx/utils.h>
++#include <wx/settings.h>
+ 
+ 
+ #define HIGHLITED_TIMERID		777
+--- XaraLX-0.7r1766/wxXtra/gridcombo.h.orig	2007-03-14 09:33:43.000000000 +0000
++++ XaraLX-0.7r1766/wxXtra/gridcombo.h	2007-03-14 09:36:55.000000000 +0000
+@@ -22,6 +22,8 @@
+ #include "combog.h"
+ #endif
+ 
++#include <wx/timer.h>
++#include <wx/scrolwin.h>
+ 
+ class wxGridCombo;
+ 

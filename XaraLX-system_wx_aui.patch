@@ -1,0 +1,302 @@
+--- XaraLX-0.7r1766/wxXtra/framemanager.h.orig	2007-03-14 15:09:22.000000000 +0000
++++ XaraLX-0.7r1766/wxXtra/framemanager.h	2007-03-14 15:10:04.000000000 +0000
+@@ -390,7 +390,7 @@
+ 
+ 
+ 
+-class WXDLLIMPEXP_AUI wxFrameManager : public wxEvtHandler
++class WXDLLIMPEXP_AUI _don_t_use_internal_wxFrameManager : public wxEvtHandler
+ {
+ friend class wxFloatingPane;
+ 
+--- XaraLX-0.7r1766/wxOil/dlgmgr.h.orig	2007-03-14 11:04:23.000000000 +0000
++++ XaraLX-0.7r1766/wxOil/dlgmgr.h	2007-03-14 11:26:12.000000000 +0000
+@@ -821,8 +821,8 @@
+ 
+ 	static void EnsurePanePreferenceDeclared(wxString key);
+ 	static void InitPaneInfoHash();
+-	static void LoadPaneInfo(wxString key, wxPaneInfo &paneinfo);
+-	static void SavePaneInfo(wxString key, wxPaneInfo &paneinfo);
++	static void LoadPaneInfo(wxString key, wxAuiPaneInfo &paneinfo);
++	static void SavePaneInfo(wxString key, wxAuiPaneInfo &paneinfo);
+ 	static IdToSerializedPaneInfo * s_pPaneInfoHash;
+ 
+ public:
+--- XaraLX-0.7r1766/wxOil/camelot.cpp.orig	2007-03-14 12:03:59.000000000 +0000
++++ XaraLX-0.7r1766/wxOil/camelot.cpp	2007-03-14 19:35:30.000000000 +0000
+@@ -101,6 +101,8 @@
+ //
+ /***************************************************************************************************************************/
+ 
++#include <wx/aui/aui.h>
++#include <wx/aui/floatpane.h>
+ #include "camtypes.h"
+ 
+ #include "camdoc.h"
+@@ -293,7 +295,7 @@
+ 	{
+ 		TRACEUSER("luke", _T("CCamApp::FilterEvent activate to %s"), pEventObject->GetClassInfo()->GetClassName());
+ 
+-		if( pEventObject->IsKindOf( CLASSINFO(wxFloatingPane) ) )
++		if( pEventObject->IsKindOf( CLASSINFO(wxAuiFloatingFrame) ) )
+ 		{
+ 			wxClassInfo* pClassInfo = pEventObject->GetClassInfo();
+ 			while( NULL != pClassInfo )
+@@ -1039,7 +1041,7 @@
+ 	TRACET(_T("CCamApp::Init Setting mainframe as top window"));
+ 
+ 	m_pMainFrame->CreateToolbars();
+-	m_pMainFrame->UpdateFrameManager();
++	m_pMainFrame->UpdateManager();
+ 
+ 	// Show the main frame window
+ 	// make maximized if thats what we were last time, unless overridden by user
+--- XaraLX-0.7r1766/wxOil/camframe.cpp.orig	2007-03-14 13:26:19.000000000 +0000
++++ XaraLX-0.7r1766/wxOil/camframe.cpp	2007-03-14 16:32:22.000000000 +0000
+@@ -129,14 +130,14 @@
+ 
+ #if defined(USE_WXAUI)
+ 
+-class CamFrameManager : public wxFrameManager
++class CamFrameManager : public wxAuiManager
+ {
+ private:
+ 	DECLARE_CLASS( CamFrameManager )
+ 
+ public:
+ 	CamFrameManager(wxFrame* frame = NULL, unsigned int /*TYPENOTE: Correct*/ flags = wxAUI_MGR_DEFAULT)
+-		   : wxFrameManager(frame, flags)
++		   : wxAuiManager(frame, flags)
+ 	{
+ 	}
+ 
+@@ -154,7 +155,7 @@
+ 		event.Skip();
+ 	}
+ 
+-	void OnPaneClose(wxFrameManagerEvent& event)
++	void OnPaneClose(wxAuiManagerEvent& event)
+ 	{
+ 		// For now just pretend cancel was clicked. This is sufficient to fool
+ 		// dialogmanager into closing the window it would seem
+@@ -174,11 +175,11 @@
+ 	DECLARE_EVENT_TABLE()
+ };
+ 
+-IMPLEMENT_CLASS( CamFrameManager, wxFrameManager )
+-BEGIN_EVENT_TABLE( CamFrameManager, wxFrameManager )
++IMPLEMENT_CLASS( CamFrameManager, wxAuiManager )
++BEGIN_EVENT_TABLE( CamFrameManager, wxAuiManager )
+ 	EVT_SIZE(CamFrameManager::OnSize)
+ 	EVT_MOVE(CamFrameManager::OnMove)
+-	EVT_AUI_PANECLOSE(CamFrameManager::OnPaneClose)
++	EVT_AUI_PANE_CLOSE(CamFrameManager::OnPaneClose)
+ END_EVENT_TABLE()
+ 
+ #endif
+@@ -386,7 +387,7 @@
+ 	{
+ 		pColourBar->Create(this, 12345);
+ 
+-		wxPaneInfo paneinfo;
++		wxAuiPaneInfo paneinfo;
+ 		paneinfo.BottomDockable().Bottom();
+ 		paneinfo.CaptionVisible(false);
+ 		m_pFrameManager->AddPane(pColourBar, paneinfo);
+@@ -417,7 +418,7 @@
+ 	return TRUE;
+ }
+ 
+-void CCamFrame::UpdateFrameManager()
++void CCamFrame::UpdateManager()
+ {
+ #if defined(USE_WXAUI)
+ 	if (m_pFrameManager)
+--- XaraLX-0.7r1766/wxOil/ccolbar.cpp.orig	2007-03-14 21:55:27.000000000 +0000
++++ XaraLX-0.7r1766/wxOil/ccolbar.cpp	2007-03-14 21:55:41.000000000 +0000
+@@ -1070,7 +1070,7 @@
+ 		SetMinSize(wxSize(8, BarHeight));
+ 
+ 		InvalidateBestSize();
+-		GetMainFrame()->UpdateFrameManager();
++		GetMainFrame()->UpdateManager();
+ 	}
+ }
+ 
+@@ -3373,7 +3373,7 @@
+ 	else
+ 	{
+ 		TheColourBar->Refresh(true);		// Redraw (clear to grey for tidier resize)
+-		GetMainFrame()->UpdateFrameManager();	// Resize to add/remove the scrollbar
++		GetMainFrame()->UpdateManager();	// Resize to add/remove the scrollbar
+ 	}
+ }
+ 
+@@ -4171,7 +4171,7 @@
+ 		else
+ 			TheColourBar->Show(false);
+ 
+-		GetMainFrame()->UpdateFrameManager();	// And ensure it places itself usefully!
++		GetMainFrame()->UpdateManager();	// And ensure it places itself usefully!
+ 	}
+ }
+ 
+--- XaraLX-0.7r1766/wxOil/dlgmgr.cpp.orig	2007-03-14 16:24:23.000000000 +0000
++++ XaraLX-0.7r1766/wxOil/dlgmgr.cpp	2007-03-14 17:39:51.000000000 +0000
+@@ -470,7 +471,7 @@
+ 		// We really should take a wxPaneInfo() as an additional parameter to this function to allow this sort
+ 		// of stuff to be specified. Or try and retrieve it from the DialogBarOp or similar. Anyway, for now
+ 		// give it some default parameters
+-		wxPaneInfo paneinfo;
++		wxAuiPaneInfo paneinfo;
+ 		if (!DlgOp->IsABar())
+ 		{
+ 			// default galleries to 300 deep. Specifying -1 as a width doesn't seem to work
+@@ -519,19 +520,19 @@
+ 
+ 		// Ensure the main frame is shown if the pane is floating, or it can get "behind"
+ 		// the main frame on wxGTK
+-		if (paneinfo.IsFloating() && !CCamFrame::GetFrameManager()->GetManagedWindow()->IsShown())
+-			CCamFrame::GetFrameManager()->GetManagedWindow()->Show();
++		if (paneinfo.IsFloating() && !CCamFrame::GetManager()->GetManagedWindow()->IsShown())
++			CCamFrame::GetManager()->GetManagedWindow()->Show();
+ 
+-		CCamFrame::GetFrameManager()->AddPane(pDialogWnd, paneinfo);
++		CCamFrame::GetManager()->AddPane(pDialogWnd, paneinfo);
+ 
+-		CCamFrame::GetMainFrame()->UpdateFrameManager();
++		CCamFrame::GetMainFrame()->UpdateManager();
+ 
+ 		// Make sure newly created floating panes are at the top in an attempt to fix
+ 		// Bugzilla bug 1393 (can't duplicate here...)
+ 		wxWindow * pTLW = pDialogWnd;
+ 		while (pTLW->GetParent())
+ 			pTLW=pTLW->GetParent();
+-		if (pTLW->IsKindOf(CLASSINFO(wxFloatingPane)))
++		if (pTLW->IsKindOf(CLASSINFO(wxAuiFloatingFrame)))
+ 			pTLW->Raise();
+ 
+ 	}
+@@ -862,7 +863,7 @@
+ 
+ ********************************************************************************************/
+ 
+-void DialogManager::LoadPaneInfo(wxString key, wxPaneInfo &paneinfo)
++void DialogManager::LoadPaneInfo(wxString key, wxAuiPaneInfo &paneinfo)
+ {
+ 	if (!s_pPaneInfoHash)
+ 		InitPaneInfoHash();
+@@ -884,7 +885,7 @@
+ 	TRACEUSER("amb", _T("val=%s"), (const TCHAR *)(i->second));
+ 
+ 	wxString name = (wxString)((const TCHAR *)(i->second));
+-	CCamFrame::GetFrameManager()->LoadPaneInfo(name, paneinfo);
++	CCamFrame::GetManager()->LoadPaneInfo(name, paneinfo);
+ }
+ 
+ /********************************************************************************************
+@@ -901,7 +902,7 @@
+ 
+ ********************************************************************************************/
+ 
+-void DialogManager::SavePaneInfo(wxString key, wxPaneInfo &paneinfo)
++void DialogManager::SavePaneInfo(wxString key, wxAuiPaneInfo &paneinfo)
+ {
+ 	// work around mysterious wxGTK sizing bug
+ 	if ((paneinfo.IsOk()) && (paneinfo.IsFloating()))
+@@ -917,7 +918,7 @@
+ 
+ 	EnsurePanePreferenceDeclared(key);
+ 
+-	(*s_pPaneInfoHash)[key]=CCamFrame::GetFrameManager()->SavePaneInfo(paneinfo);
++	(*s_pPaneInfoHash)[key]=CCamFrame::GetManager()->SavePaneInfo(paneinfo);
+ }
+ 
+ /********************************************************************************************
+@@ -993,7 +994,7 @@
+ 	}
+ 
+ 	if (pDlgOp->pEvtHandler->wxAUImanaged)
+-		CCamFrame::GetMainFrame()->UpdateFrameManager();
++		CCamFrame::GetMainFrame()->UpdateManager();
+ 
+ }
+ 
+@@ -1040,7 +1041,7 @@
+ 	}
+ 
+ 	if (pDlgOp->pEvtHandler->wxAUImanaged)
+-		CCamFrame::GetMainFrame()->UpdateFrameManager();
++		CCamFrame::GetMainFrame()->UpdateManager();
+ }
+ 
+ 
+@@ -1088,7 +1089,7 @@
+ 	ERROR2IF(!WindowID, FALSE, "BringToTop called on a dialog without a window");
+ 	( (wxWindow *)WindowID )->Raise();
+ 	if (pDlgOp->pEvtHandler->wxAUImanaged)
+-		CCamFrame::GetMainFrame()->UpdateFrameManager();
++		CCamFrame::GetMainFrame()->UpdateManager();
+ 	return TRUE;
+ }
+ 
+@@ -1895,12 +1896,12 @@
+ 
+ 	if (pDlgOp->pEvtHandler->wxAUImanaged)
+ 	{
+-		wxPaneInfo paneinfo = CCamFrame::GetMainFrame()->GetFrameManager()->GetPane(pCWnd);
++		wxAuiPaneInfo paneinfo = CCamFrame::GetMainFrame()->GetManager()->GetPane(pCWnd);
+ 		if (paneinfo.IsOk())
+ 			SavePaneInfo(wxString(CamResource::GetObjectName(pCWnd->GetId())), paneinfo);
+ 		// Remove the bar from wxAUI
+-		CCamFrame::GetMainFrame()->GetFrameManager()->DetachPane(pCWnd);
+-		CCamFrame::GetMainFrame()->UpdateFrameManager();
++		CCamFrame::GetMainFrame()->GetManager()->DetachPane(pCWnd);
++		CCamFrame::GetMainFrame()->UpdateManager();
+ 	}
+ 
+ 	// Delete all discardable strings associated with the dialog
+--- XaraLX-0.7r1766/wxOil/camframe.h.orig	2007-03-14 13:26:22.000000000 +0000
++++ XaraLX-0.7r1766/wxOil/camframe.h	2007-03-14 16:32:09.000000000 +0000
+@@ -98,7 +98,6 @@
+ #include <wx/fl/frmview.h>
+ // Forward definitions
+ class CCamCanvas;
+-class wxFrameManager;
+ class CaptureWnd;
+ 
+ class CCamFrame :
+@@ -114,7 +115,7 @@
+ 	
+ 	wxMenu			   *m_editMenu;
+ #if defined(USE_WXAUI)
+-	wxFrameManager *m_pFrameManager;
++	wxAuiManager *m_pFrameManager;
+ #endif
+ 	wxStatusBar*		m_pStatusBar;
+ 
+@@ -130,13 +131,13 @@
+ 	~CCamFrame();
+ 
+ 	static CCamFrame * GetMainFrame() {return m_pMainFrame;}
+-	static wxFrameManager * GetFrameManager() { return m_pMainFrame?m_pMainFrame->m_pFrameManager:NULL;}
++	static wxAuiManager * GetManager() { return m_pMainFrame?m_pMainFrame->m_pFrameManager:NULL;}
+ 	
+ 	wxStatusBar* GetStatusBar() const 	{ return m_pStatusBar; }
+ 
+ 	BOOL CreateToolbars();
+ 
+-	void UpdateFrameManager();
++	void UpdateManager();
+ 
+     /// Creation
+     bool Create( wxWindow *parent, wxWindowID id = -1, const wxString &caption = wxT("wxTemplate"), 
+--- XaraLX-0.7r1766/class-renaming.txt.orig	2007-03-14 15:08:35.000000000 +0000
++++ XaraLX-0.7r1766/class-renaming.txt	2007-03-14 15:08:35.000000000 +0000
+@@ -0,0 +1,6 @@
++XaraLX name			wxAui name
++
++wxFloatingPane			wxAuiFloatingFrame
++wxFrameManager			wxAuiManager
++wxFrameManagerEvent		wxAuiManagerEvent
++wxPaneInfo			wxAuiPaneInfo
