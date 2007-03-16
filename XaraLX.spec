@@ -8,6 +8,8 @@ Group:		X11/Applications/Graphics
 Source0:	http://downloads.xara.com/opensource/%{name}-%{version}.tar.bz2
 # Source0-md5:	fdbe0bdcbb50d58ff1b9b03e6c0ad99c
 Patch0:		%{name}-desktop.patch
+Patch1:		%{name}-wx28.patch
+Patch2:		%{name}-system_wx_aui.patch
 URL:		http://www.xaraxtreme.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -49,6 +51,8 @@ Przykłady z Xara Extreme LX.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
+%patch2 -p1
 
 %build
 %{__autopoint}
