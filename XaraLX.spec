@@ -1,12 +1,11 @@
-# NOTO: it builds; it starts and show nice main window; 
-# then it unfortunately got SIGILL;
-# I guess, another applicatoin gcc-4.2 "ready"?
+# NOTE: it builds; it starts and show nice main window; 
+# then it unfortunately got SIGILL - gcc-4.2 issue
 #
 Summary:	Xara Extreme LX Vector Image Editor
 Summary(pl.UTF-8):	Edytor obrazów wektorowych Xara Extreme LX
 Name:		XaraLX
 Version:	0.7r1766
-Release:	0.2
+Release:	0.9
 License:	GPL v2 with binary libraries - see LICENSE files
 Group:		X11/Applications/Graphics
 Source0:	http://downloads.xara.com/opensource/%{name}-%{version}.tar.bz2
