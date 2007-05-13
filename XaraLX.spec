@@ -8,6 +8,7 @@ Version:	0.7r1766
 Release:	0.9
 License:	GPL v2 with binary libraries - see LICENSE files
 Group:		X11/Applications/Graphics
+#Source0Download: http://www.xaraxtreme.org/developers/general/source_code__building.html
 Source0:	http://downloads.xara.com/opensource/%{name}-%{version}.tar.bz2
 # Source0-md5:	fdbe0bdcbb50d58ff1b9b03e6c0ad99c
 Patch0:		%{name}-desktop.patch
